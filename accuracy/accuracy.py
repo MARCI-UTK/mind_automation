@@ -24,8 +24,16 @@ def main(args):
 	data.columns = cols
 
 	idx = data.index[data['0'] == 'SUMMARY DATA'][0]
-	print(data.iloc[idx:].head())
+	summary = data.iloc[idx:,:9].reset_index(drop=True)
 
+	idx = summary.index[summary['0'] == 'Condition'][0]
+	print(idx)
+	data = summary.iloc[idx:].reset_index(drop=True)
+
+	data.columns = data.iloc[0]
+	data = data.iloc[1:]
+
+	print(data.head())
 if __name__ == '__main__':
 	args = argv.parse_args()
 	main(args)
