@@ -1,4 +1,4 @@
-#!/home/karim/anaconda3/envs/mind/bin/python
+#!/usr/bin/env python3
 import sys
 import os
 import glob
