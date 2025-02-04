@@ -121,7 +121,9 @@ class accuracy:
             # Adjust correct count for 'Center' type
             correct = total - incorrect
 
-        return (correct, incorrect)
+        percent = correct / (correct + incorrect)
+
+        return [correct, incorrect]
 
     def accuracy(self):
         for i in range(len(self.data['Stimulus'])):
@@ -149,6 +151,7 @@ def process_directory(input_dir, output_dir):
 
             # Save scores to CSV
             scores_df = pd.DataFrame.from_dict(acc.scores, orient='index', columns=['Correct', 'Incorrect'])
+            scores_df['Percent'] = (scores_df['Correct'] / (scores_df['Correct'] + scores_df['Incorrect'])).round(4)
             scores_df.index.name = 'Event'
             scores_df.to_csv(output_path)
             print(f"Saved accuracy scores to {output_path}")
